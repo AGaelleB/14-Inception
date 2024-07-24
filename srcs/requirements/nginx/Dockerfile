@@ -14,6 +14,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Copy SSL certificate and key
 COPY ssl/nginx.crt /etc/nginx/ssl/nginx.crt
 COPY ssl/nginx.key /etc/nginx/ssl/nginx.key
+# changer pour ssl+protocols TLSv1.2;
+
 
 # Expose port 443 for HTTPS
 EXPOSE 443
