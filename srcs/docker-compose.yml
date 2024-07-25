@@ -1,10 +1,15 @@
 # srcs/docker-compose.yml
 
 services:
-
   nginx:
     build:
       context: ./requirements/nginx/
+      args:
+        SSL_CERT_FOLDER: ${SSL_CERT_FOLDER}
+        SSL_CERT_PATH: ${SSL_CERT_PATH}
+        SSL_KEY_PATH: ${SSL_KEY_PATH}
+        SSL_CSR_PATH: ${SSL_CSR_PATH}
+        DOMAIN_NAME: ${DOMAIN_NAME}
     container_name: nginx
     ports:
       - "443:443"
@@ -12,6 +17,8 @@ services:
       - wordpress_data:/var/www/html
     networks:
       - inception_network
+    env_file:
+      - .env
 
   wordpress:
     build:
