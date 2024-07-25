@@ -1,5 +1,7 @@
 # srcs/docker-compose.yml
 
+version: '3.8'
+
 services:
   nginx:
     build:
@@ -19,20 +21,24 @@ services:
       - inception_network
     env_file:
       - .env
+    depends_on:
+      - wordpress
 
   wordpress:
     build:
       context: ./requirements/wordpress/
-    container_name: wp-php
+    container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
     networks:
       - inception_network
-    depends_on:
-      - nginx
+    env_file:
+      - .env
 
 volumes:
   wordpress_data:
 
 networks:
   inception_network:
+    driver: bridge
+
