@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Wait for the database to be ready
+# Wait for MariaDB to be ready
 while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" --silent; do
-    echo "Waiting for database connection..."
+    echo "Waiting for MariaDB to be ready..."
     sleep 2
 done
 
@@ -25,4 +25,4 @@ if ! $(wp core is-installed --allow-root); then
 fi
 
 # Start PHP-FPM
-php-fpm
+php-fpm7.4 -F

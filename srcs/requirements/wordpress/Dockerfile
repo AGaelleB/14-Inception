@@ -1,16 +1,18 @@
 FROM debian:bullseye
 
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y php-fpm php-mysql wget default-mysql-client && \
+    apt-get install -y php-fpm php-mysql wget default-mysql-client curl && \
     mkdir -p /run/php && mkdir -p /var/www/html
 
-RUN mkdir -p /run/php && \
-    mkdir -p /var/www/html
+# Install WP-CLI
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
 
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz && \
     mv wordpress/* /var/www/html/ && \
-    chown -R www-data:www-data /var/www/html/ && \
+    chown -R www-data:www-data /var/www/html && \
     rm -rf latest.tar.gz wordpress
 
 # List the contents of the php-fpm configuration directory to verify paths
@@ -25,9 +27,5 @@ RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.4/fpm/php.ini
 
 EXPOSE 9000
 
-RUN chmod +x /setup.sh
-
-CMD ["/setup.sh", "php-fpm7.4", "-F"]
-
-
+CMD ["/setup.sh"]
 

@@ -24,7 +24,7 @@ ARG DOMAIN_NAME
 RUN mkdir -p ${SSL_CERT_FOLDER} && \
     openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
     -keyout ${SSL_KEY_PATH} \
-    -out ${SSL_CERT_PATH} \
+    -out /etc/nginx/ssl/server.crt \
     -subj "/C=${COUNTRY}/ST=${STATE}/L=${LOCALITY}/O=${ORGANIZATION}/OU=${UNIT}/CN=${DOMAIN_NAME}"
 
 
