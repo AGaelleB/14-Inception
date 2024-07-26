@@ -3,7 +3,7 @@
 # Wait for MariaDB to be ready
 while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" --silent; do
     echo "Waiting for MariaDB to be ready..."
-    sleep 2
+    sleep 20
 done
 
 # Change to the WordPress installation directory
