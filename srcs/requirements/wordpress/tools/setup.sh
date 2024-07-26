@@ -1,34 +1,28 @@
-#!/bin/sh
+#!/bin/bash
 
-# Fix permissions for WordPress directory
-chown -R www-data:www-data /var/www/html/
+# Wait for the database to be ready
+while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" --silent; do
+    echo "Waiting for database connection..."
+    sleep 2
+done
 
-# Move wp-config.php if it does not exist
-if [ ! -f /var/www/html/wp-config.php ]; then
-   mv /tmp/wp-config.php /var/www/html/
+# Change to the WordPress installation directory
+cd /var/www/html
+
+# Download WordPress if not already present
+if [ ! -f wp-config.php ]; then
+    wp core download --allow-root
 fi
 
-# Wait for services to be ready
-sleep 10
-
-# Install WordPress if not already installed
-if ! wp --allow-root --path="/var/www/html/" core is-installed; then
-   wp --allow-root --path="/var/www/html/" core install \
-       --url=$WP_URL \
-       --title=$WP_TITLE \
-       --admin_user=$WP_ADMIN_USER \
-       --admin_password=$WP_ADMIN_PASSWORD \
-       --admin_email=$WP_ADMIN_EMAIL
+# Configure WordPress
+if [ ! -f wp-config.php ]; then
+    wp config create --dbname="${WORDPRESS_DB_NAME}" --dbuser="${WORDPRESS_DB_USER}" --dbpass="${WORDPRESS_DB_PASSWORD}" --dbhost="${WORDPRESS_DB_HOST}" --allow-root
 fi
 
-# Create WordPress user if not exists
-if ! wp --allow-root --path="/var/www/html/" user get $WP_USER; then
-   wp --allow-root --path="/var/www/html/" user create \
-       $WP_USER \
-       $WP_EMAIL \
-       --user_pass=$WP_PASSWORD \
-       --role=$WP_ROLE
+# Install WordPress
+if ! $(wp core is-installed --allow-root); then
+    wp core install --url="${DOMAIN_NAME}" --title="Your Blog Title" --admin_user="${WORDPRESS_ADMIN_USER}" --admin_password="${WORDPRESS_ADMIN_PASSWORD}" --admin_email="${WORDPRESS_ADMIN_EMAIL}" --allow-root
 fi
 
-# Execute the given command
-exec $@
+# Start PHP-FPM
+php-fpm
