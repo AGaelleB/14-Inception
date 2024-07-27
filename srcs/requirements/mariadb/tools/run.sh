@@ -12,8 +12,4 @@ GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO 'root'@'%' IDENTIFIED BY '${MYSQL
 SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_ROOT_PASSWORD}');
 EOF
 
-sleep 5
-
-service mariadb stop
-
 exec "$@"

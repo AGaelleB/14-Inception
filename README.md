@@ -1,5 +1,41 @@
 # 14-Inception
 
+# Commandes du Makefile
+
+### Build the Docker containers
+```sh
+make build    
+```
+
+### Start the Docker containers
+```sh
+make up   
+```
+
+### Stop the Docker containers
+```sh
+make down    
+```
+
+### View logs for all Docker containers
+```sh
+make logs     
+```
+
+### Clean up Docker resources
+```sh
+make clean   
+```
+
+### Rebuild the entire setup
+```sh
+make rebuild  
+```
+
+### Default target (build and up)
+```sh
+make          
+```
 
 
 # Commandes Docker et Docker Compose
