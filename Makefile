@@ -4,12 +4,6 @@
 DOCKER_COMPOSE = docker-compose
 DOCKER = docker
 
-# Targets
-.PHONY: all build up down logs clean rebuild
-
-# Default target
-all: build up
-
 # Build the Docker containers
 build:
 	$(DOCKER_COMPOSE) build
@@ -36,3 +30,9 @@ clean:
 
 # Rebuild the Docker containers
 rebuild: down clean build up
+
+# Targets
+.PHONY: all build up down logs clean rebuild
+
+# Default target
+all: build up
