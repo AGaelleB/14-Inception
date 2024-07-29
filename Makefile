@@ -2,23 +2,24 @@
 
 # Variables
 DOCKER_COMPOSE = docker-compose
+DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 DOCKER = docker
 
 # Build the Docker containers
 build:
-	$(DOCKER_COMPOSE) build
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) build
 
 # Start the Docker containers
 up:
-	$(DOCKER_COMPOSE) up -d
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up -d
 
 # Stop the Docker containers
 down:
-	$(DOCKER_COMPOSE) down
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) down
 
 # View logs for all Docker containers
 logs:
-	$(DOCKER_COMPOSE) logs -f
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) logs -f
 
 # Clean up Docker resources
 clean:
