@@ -1,22 +1,24 @@
+# srcs/requirements/mariadb/Dockerfile
+
 FROM debian:bullseye
 
-# Install necessary packages
+# Installer les paquets nécessaires
 RUN apt-get update && \
    apt-get install -y --no-install-recommends --no-install-suggests \
    mariadb-server && \
    rm -rf /var/lib/apt/lists/*
 
-# Copy custom configuration files
+# Copier les fichiers de configuration personnalisés
 COPY conf/my.cnf /etc/mysql/my.cnf
 
-# Copy initialization script
+# Copier le script d'initialisation
 COPY ./tools/run.sh /run.sh
 
+# Rendre le script d'initialisation exécutable
 RUN chmod +x /run.sh
 
-
-# Expose the MySQL port
+# Exposer le port MySQL
 EXPOSE 3306
 
-# Start MySQL service
+# Démarrer le service MySQL
 CMD ["/run.sh", "mysqld"]
