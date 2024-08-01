@@ -2,7 +2,7 @@
 
 FROM debian:bullseye
 
-# Port 443 pour HTTPS
+# Port pour HTTPS
 EXPOSE 443
 
 # Mise à jour des paquets et installation de NGINX et OpenSSL

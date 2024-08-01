@@ -33,7 +33,7 @@ RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.4/fpm/php.ini
     sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf && \
     chmod +x /setup.sh
 
-# Expose le port 9000
+# Port pour PHP-FPM
 EXPOSE 9000
 
 # Commande par défaut pour lancer le script setup.sh

@@ -17,7 +17,7 @@ COPY ./tools/run.sh /run.sh
 # Rendre le script d'initialisation exécutable
 RUN chmod +x /run.sh
 
-# Exposer le port MySQL
+# Port pour MySQL
 EXPOSE 3306
 
 # Démarrer le service MySQL
