@@ -15,7 +15,7 @@ done
 echo "MariaDB est prêt !"
 
 # Changer de répertoire pour le répertoire d'installation de WordPress
-cd /home/abonnefo/data/wordpress
+cd /var/www/html
 
 # Vérifier si le fichier wp-config.php existe pour déterminer si WordPress est installé
 if [ -f wp-config.php ]; then
