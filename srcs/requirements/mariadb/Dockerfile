@@ -12,13 +12,13 @@ RUN apt-get update && \
 COPY conf/my.cnf /etc/mysql/my.cnf
 
 # Copier le script d'initialisation
-COPY ./tools/runMariaDB.sh /runMariaDB.sh
+COPY ./tools/run.sh /run.sh
 
 # Rendre le script d'initialisation exécutable
-RUN chmod +x /runMariaDB.sh
+RUN chmod +x /run.sh
 
 # Port pour MySQL
 EXPOSE 3306
 
 # Démarrer le service MySQL
-CMD ["/runMariaDB.sh", "mysqld"]
+CMD ["/run.sh", "mysqld"]

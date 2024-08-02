@@ -57,10 +57,19 @@ services:
       - wordpress
     restart: on-failure
 
-
 volumes:
-  wordpress_data:
   mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/abonnefo/data/mariadb
+      o: bind
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/abonnefo/data/wordpress
+      o: bind
 
 networks:
   inception_network:

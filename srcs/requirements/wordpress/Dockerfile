@@ -25,16 +25,16 @@ RUN ls -la /etc/php/7.4/fpm/
 # Copie le fichier de configuration personnalisé www.conf pour php-fpm
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-# Copie le script de configuration runWordPress.sh
-COPY tools/runWordPress.sh /runWordPress.sh
+# Copie le script de configuration setup.sh
+COPY tools/setup.sh /setup.sh
 
 # Modifie la configuration php.ini et www.conf pour php-fpm
 RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.4/fpm/php.ini && \
     sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf && \
-    chmod +x /runWordPress.sh
+    chmod +x /setup.sh
 
 # Port pour PHP-FPM
 EXPOSE 9000
 
-# Commande par défaut pour lancer le script runWordPress.sh
-CMD ["/runWordPress.sh"]
+# Commande par défaut pour lancer le script setup.sh
+CMD ["/setup.sh"]
