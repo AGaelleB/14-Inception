@@ -9,7 +9,7 @@ function check_mariadb() {
 echo "Vérification de la disponibilité de MariaDB..."
 while ! check_mariadb; do
     echo "En attente que MariaDB soit prêt..."
-    sleep 5
+    sleep 1
 done
 
 echo "MariaDB est prêt !"

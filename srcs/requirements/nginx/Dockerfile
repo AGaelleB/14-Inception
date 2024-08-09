@@ -2,9 +2,6 @@
 
 FROM debian:bullseye
 
-# Port pour HTTPS
-EXPOSE 443
-
 # Mise à jour des paquets et installation de NGINX et OpenSSL
 RUN apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
     nginx \
@@ -35,6 +32,9 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 # Crée le répertoire pour les fichiers web et change les permissions pour l'utilisateur NGINX
 RUN mkdir -p /var/www/
 RUN chown -R www-data:www-data /var/www/
+
+# Port pour HTTPS
+EXPOSE 443
 
 # Commande pour démarrer NGINX au premier plan
 CMD ["nginx", "-g", "daemon off;"]
