@@ -1,6 +1,3 @@
-demander a Rayan si son .env etait dans son push
-
---------------
 POUR MONTRER LA DATA MARIADB 
 
 docker exec -it mariadb mysql -u root -pDBroot

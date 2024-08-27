@@ -33,7 +33,6 @@ COPY conf/nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /var/www/
 RUN chown -R www-data:www-data /var/www/
 
-
 # Port pour HTTPS
 EXPOSE 443
 
