@@ -1,32 +1,24 @@
 demander a Rayan si son .env etait dans son push
 
 --------------
+POUR MONTRER LA DATA MARIADB 
 
-docker exec -it mariadb mysql
+docker exec -it mariadb mysql -u root -pDBroot
 
-une fois dans mon docker mariabd pour verifier la database faire : 
+SHOW DATABASES;         # Afficher toutes les bases de données
+USE DBwordpress;        # Sélectionner une base de données
+SHOW TABLES;            # Afficher toutes les tables dans la base de données sélectionnée
+DESCRIBE <table_name>;  # Afficher la structure d'une table
 
-
-# Afficher toutes les bases de données
-SHOW DATABASES;
-# Sélectionner une base de données
-USE <database_name>;
-# Afficher toutes les tables dans la base de données sélectionnée
-SHOW TABLES;
-# Afficher la structure d'une table
-DESCRIBE <table_name>;
 
 --------------
 
-peut etre enlever dans docker compose restart: on-failure
+si je veux voir les logs de mariadb je dois entrer dans le docker avec bash
+docker exec -it mariadb bash
 
-si je fais:
-    docker logs mariadb
+puis 
 
-je ne devrais pas avoir pleins de : 
-    Starting MariaDB database server: mariadbd.
-    mysqld is alive
-
+cat /var/log/mysql/error.log
 
 --------------
 
