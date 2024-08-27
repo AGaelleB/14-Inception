@@ -2,11 +2,9 @@ POUR MONTRER LA DATA MARIADB
 
 docker exec -it mariadb mysql -u root -pDBroot
 
-SHOW DATABASES;         # Afficher toutes les bases de données
-USE DBwordpress;        # Sélectionner une base de données
-SHOW TABLES;            # Afficher toutes les tables dans la base de données sélectionnée
-DESCRIBE <table_name>;  # Afficher la structure d'une table
-
+SHOW DATABASES;             # Afficher toutes les bases de données
+USE DBwordpress;            # Sélectionner une base de données
+SELECT * FROM wp_comments;  # Afficher les coms
 
 --------------
 
