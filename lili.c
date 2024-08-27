@@ -1,31 +1,20 @@
-http://abonnefo.42.fr/:443
-    -> ca fonctionne et c'est normal
-et 
-http://abonnefo.42.fr/:80
-    -> ca ne devrait pas fonctionner mais chez moi ca me bascule vers https://abonnefo.42.fr/:80/ et ca fonctionne 
-
-NE DOIT PAS MARCHER 
-
-
-resolu en exosant le port 80 egalement 
-
---------------
-
 demander a Rayan si son .env etait dans son push
 
 --------------
 
 docker exec -it mariadb mysql
-pourquoi ca s arrete ??? 
-faire cette commande pour montrer la database une fois un commentaire mis sur mariadb
-
---------------
 
 une fois dans mon docker mariabd pour verifier la database faire : 
 
+
+# Afficher toutes les bases de données
 SHOW DATABASES;
-USE <DATABASE NAME>;
-SELECT * FROM wp_comments;
+# Sélectionner une base de données
+USE <database_name>;
+# Afficher toutes les tables dans la base de données sélectionnée
+SHOW TABLES;
+# Afficher la structure d'une table
+DESCRIBE <table_name>;
 
 --------------
 

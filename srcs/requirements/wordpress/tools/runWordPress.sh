@@ -2,7 +2,7 @@
 
 # Fonction pour vérifier si MariaDB est prêt
 function check_mariadb() {
-  mysql -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" -e "SHOW DATABASES;" > /dev/null 2>&1
+    mysql -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" -e "SHOW DATABASES;" > /dev/null 2>&1
 }
 
 # Attendre que MariaDB soit prêt
@@ -24,6 +24,7 @@ else
     # Configurer WordPress
     echo "Création du fichier wp-config.php..."
     wp config create --dbname="${WORDPRESS_DB_NAME}" --dbuser="${WORDPRESS_DB_USER}" --dbpass="${WORDPRESS_DB_PASSWORD}" --dbhost="${WORDPRESS_DB_HOST}" --allow-root
+
 
     # Installer WordPress
     echo "Installation de WordPress..."
