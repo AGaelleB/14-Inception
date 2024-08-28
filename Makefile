@@ -1,23 +1,21 @@
-# Makefile for Docker Compose setup
-
 # Variables
 DOCKER_COMPOSE = docker-compose
 DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 DOCKER = docker
 
-# Build the Docker containers
+# Build
 build:
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) build
 
-# Start the Docker containers
+# Start
 up:
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up -d
 
-# Stop the Docker containers
+# Stop
 down:
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) down
 
-# View logs for all Docker containers
+# View logs
 logs:
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) logs -f
 
@@ -29,7 +27,7 @@ clean:
 	$(DOCKER) volume rm $$(docker volume ls -q) || true
 	$(DOCKER) network rm $$(docker network ls -q) 2>/dev/null || true
 
-# Rebuild the Docker containers
+# Rebuild
 rebuild: down clean build up
 
 # Targets

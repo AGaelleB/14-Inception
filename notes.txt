@@ -15,15 +15,4 @@ puis
 
 cat /var/log/mysql/error.log
 
---------------
-
-Penser a installer docker-compose 
-    sudo apt-get install docker-compose
-    sudo apt-get install docker-compose-plugin
-
-pour ensuite faire
-    docker-compose ps
-
-ATTENTION TROUVER UNE SOLUTION POUR FAIRE LA COMMANDE SANS "-", c-a-d 
-    docker compose ps
 
