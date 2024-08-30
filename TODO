@@ -1,0 +1,38 @@
+----------
+
+resume du probleme.
+mon script mysql est ma lance, 
+
+Il semble que la communication entre mariadb et worpress soit mauvaise, wordpress n arrive pas a lire le script de mariadb ce qui fait que le user n est pas enregistree par worpress, donc ne cree pas la database
+
+il faut que mon script soit bien lu par worpress et donc modifier pour ajouter un scrip runMariaDB en plus de init.sql.
+
+Ce nouveau script devrait creer et donner les droits des fichiers necessaires dans ~/data. 
+Ensuite il va run en arriere plan deamon, lancer les script pour la creation de worpress et mariadb, puis va kill deamon qui etait en arriere plan pour placer mon scrip de config en premer plan. cela est en lien avec etc/mysql/my.cnf
+
+----------
+
+TEST FINAL POUR VERIFIER SI TOUT FONCTIONNNE 
+
+je dois supprimer tout ce qui est fait dans 
+
+➜  eval1bis git:(master) ✗ cd 
+➜  ~ cd data 
+➜  data ls -la
+total 8
+drwxrwxrwx  2 abonnefo abonnefo 4096 Aug 30 17:26 .
+drwx------ 22 abonnefo abonnefo 4096 Aug 30 17:29 ..
+➜  data 
+
+
+pour ensuite retry de make et ca doit marcher 
+
+----------
+
+solution automatiser pour faire : 
+
+mkdir -p /home/abonnefo/data/mariadb
+mkdir -p /home/abonnefo/data/wordpress
+
+
+puis une fois dans le docker 

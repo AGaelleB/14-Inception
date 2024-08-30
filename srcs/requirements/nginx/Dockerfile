@@ -1,5 +1,4 @@
 # srcs/requirements/nginx/Dockerfile
-
 FROM debian:bullseye
 
 # Mise à jour des paquets et installation de NGINX et OpenSSL

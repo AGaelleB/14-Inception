@@ -1,5 +1,4 @@
 # srcs/requirements/wordpress/Dockerfile
-
 FROM debian:bullseye
 
 # Met à jour et installe les paquets nécessaires

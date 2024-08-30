@@ -31,6 +31,18 @@ else
     wp core install --url="${DOMAIN_NAME}" --title="Titre de Votre Blog" --admin_user="${WORDPRESS_ADMIN_USER}" --admin_password="${WORDPRESS_ADMIN_PASSWORD}" --admin_email="${WORDPRESS_ADMIN_EMAIL}" --allow-root
 fi
 
+# Fixer les permissions et la propriété du répertoire des téléchargements
+echo "Fixation des permissions et de la propriété du répertoire wp-content/uploads..."
+chown -R www-data:www-data wp-content/uploads
+chmod -R 755 wp-content/uploads
+
+chown -R www-data:www-data /var/www/html/wp-content
+chmod -R 755 /var/www/html/wp-content
+
+
 # Démarrer PHP-FPM
 echo "Démarrage de PHP-FPM..."
 php-fpm7.4 -F
+
+
+
