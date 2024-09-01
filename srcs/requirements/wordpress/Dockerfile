@@ -1,7 +1,7 @@
 # srcs/requirements/wordpress/Dockerfile
 FROM debian:bullseye
 
-# Mise à jour et installation des paquets nécessaires
+# Maj et installation des paquets nécessaires
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y php-fpm php-mysql wget default-mysql-client curl && \
     mkdir -p /run/php && mkdir -p /var/www/html
@@ -11,20 +11,20 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
-# Télécharge et installe WordPress
+# DL et installe WordPress
 RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xzf latest.tar.gz && \
     mv wordpress/* /var/www/html/ && \
     chown -R www-data:www-data /var/www/html && \
     rm -rf latest.tar.gz wordpress
 
-# Copie le fichier de configuration personnalisé www.conf pour php-fpm
+# Cp le fichier de config personnalisé www.conf pour php-fpm
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-# Copie le script de configuration runWordPress.sh
+# Cp le script de config runWordPress.sh
 COPY tools/runWordPress.sh /runWordPress.sh
 
-# Modifie la configuration php.ini et www.conf pour php-fpm
+# Modifie la config php.ini et www.conf pour php-fpm
 RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.4/fpm/php.ini && \
     sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf && \
     chmod +x /runWordPress.sh
@@ -32,5 +32,4 @@ RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.4/fpm/php.ini
 # Exposer le port PHP-FPM
 EXPOSE 9000
 
-# Commande par défaut pour lancer le script runWordPress.sh
 CMD ["/runWordPress.sh"]

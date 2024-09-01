@@ -9,7 +9,7 @@ until mysqladmin ping --silent; do
     sleep 1
 done
 
-# Exécuter les configurations initiales
+# Exécuter les configs initiales
 echo "MariaDB is ready. Executing initial setup..."
 mysql -u root <<EOF
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
