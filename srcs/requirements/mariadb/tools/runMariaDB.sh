@@ -6,7 +6,7 @@ mysqld_safe --datadir='/var/lib/mysql' &
 # Attendre que le serveur soit prêt
 until mysqladmin ping --silent; do
     echo "Waiting for MariaDB to be ready..."
-    sleep 2
+    sleep 1
 done
 
 # Exécuter les configurations initiales

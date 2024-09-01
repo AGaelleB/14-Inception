@@ -21,6 +21,7 @@ services:
     container_name: wordpress
     volumes:
       - wordpress_data:/var/www/html
+      - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf  # Montage du fichier nginx.conf
     networks:
       - inception_network
     env_file:

@@ -1,17 +1,3 @@
-----------
-
-resume du probleme.
-mon script mysql est ma lance, 
-
-Il semble que la communication entre mariadb et worpress soit mauvaise, wordpress n arrive pas a lire le script de mariadb ce qui fait que le user n est pas enregistree par worpress, donc ne cree pas la database
-
-il faut que mon script soit bien lu par worpress et donc modifier pour ajouter un scrip runMariaDB en plus de init.sql.
-
-Ce nouveau script devrait creer et donner les droits des fichiers necessaires dans ~/data. 
-Ensuite il va run en arriere plan deamon, lancer les script pour la creation de worpress et mariadb, puis va kill deamon qui etait en arriere plan pour placer mon scrip de config en premer plan. cela est en lien avec etc/mysql/my.cnf
-
-----------
-
 TEST FINAL POUR VERIFIER SI TOUT FONCTIONNNE 
 
 je dois supprimer tout ce qui est fait dans 
@@ -26,44 +12,3 @@ drwx------ 22 abonnefo abonnefo 4096 Aug 30 17:29 ..
 
 
 pour ensuite retry de make et ca doit marcher 
-
-----------
-
-Egalement, je veux automatiser la creation des fichiers data pour faire : 
-
-mkdir -p /home/abonnefo/data/mariadb
-mkdir -p /home/abonnefo/data/wordpress
-
-
-
-----
-
-si je fais manuellement 
-
-➜  14-Inception git:(main) ✗ docker-compose -f srcs/docker-compose.yml exec mariadb mysql -u root -pDBroot
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 10
-Server version: 10.5.23-MariaDB-0+deb11u1 Debian 11
-
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-MariaDB [(none)]> CREATE DATABASE IF NOT EXISTS 'DBwordpress';
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''DBwordpress'' at line 1
-MariaDB [(none)]> CREATE USER IF NOT EXISTS 'wpUser'@'%' IDENTIFIED BY '123';
-ser'@'%' IDENTIFIED BY '123';
-FLUSH PRIVILEGES;
-Query OK, 0 rows affected (0.008 sec)
-
-MariaDB [(none)]> GRANT ALL PRIVILEGES ON DBwordpress.* TO 'wpUser'@'%' IDENTIFIED BY '123';
-Query OK, 0 rows affected (0.005 sec)
-
-MariaDB [(none)]> FLUSH PRIVILEGES; 
-Query OK, 0 rows affected (0.000 sec)
-
-MariaDB [(none)]> exit
-Bye
-➜  14-Inception git:(main) ✗ 
-
-ca fonctionne mais ca doit etre automatisee dans le script

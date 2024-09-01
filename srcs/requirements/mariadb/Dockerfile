@@ -15,4 +15,4 @@ COPY ./tools/runMariaDB.sh /runMariaDB.sh
 RUN chmod +x /runMariaDB.sh
 
 # Définir le point d'entrée pour démarrer MariaDB via le script
-ENTRYPOINT ["/runMariaDB.sh"]
+CMD ["/runMariaDB.sh"]

@@ -33,4 +33,4 @@ RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g' /etc/php/7.4/fpm/php.ini
 EXPOSE 9000
 
 # Commande par défaut pour lancer le script runWordPress.sh
-ENTRYPOINT ["/runWordPress.sh"]
+CMD ["/runWordPress.sh"]
