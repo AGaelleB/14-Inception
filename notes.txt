@@ -15,4 +15,8 @@ puis
 
 cat /var/log/mysql/error.log
 
+docker-compose -f srcs/docker-compose.yml exec mariadb cat /var/log/mysql/error.log
+
+
+------
 

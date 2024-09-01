@@ -9,7 +9,7 @@ function check_mariadb() {
 echo "Vérification de la disponibilité de MariaDB..."
 while ! check_mariadb; do
     echo "En attente que MariaDB soit prêt..."
-    sleep 1
+    sleep 2
 done
 
 echo "MariaDB est prêt !"
@@ -21,14 +21,28 @@ cd /var/www/html
 if [ -f wp-config.php ]; then
     echo "WordPress est déjà installé."
 else
-    # Configurer WordPress
     echo "Création du fichier wp-config.php..."
     wp config create --dbname="${WORDPRESS_DB_NAME}" --dbuser="${WORDPRESS_DB_USER}" --dbpass="${WORDPRESS_DB_PASSWORD}" --dbhost="${WORDPRESS_DB_HOST}" --allow-root
-
+    
+    if [ $? -ne 0 ]; then
+        echo "Erreur lors de la création du fichier wp-config.php"
+        exit 1
+    fi
 
     # Installer WordPress
     echo "Installation de WordPress..."
     wp core install --url="${DOMAIN_NAME}" --title="Titre de Votre Blog" --admin_user="${WORDPRESS_ADMIN_USER}" --admin_password="${WORDPRESS_ADMIN_PASSWORD}" --admin_email="${WORDPRESS_ADMIN_EMAIL}" --allow-root
+    
+    if [ $? -ne 0 ]; then
+        echo "Erreur lors de l'installation de WordPress"
+        exit 1
+    fi
+fi
+
+# Vérifier et créer le répertoire wp-content/uploads s'il n'existe pas
+if [ ! -d wp-content/uploads ]; then
+    echo "Création du répertoire wp-content/uploads..."
+    mkdir -p wp-content/uploads
 fi
 
 # Fixer les permissions et la propriété du répertoire des téléchargements
@@ -39,10 +53,6 @@ chmod -R 755 wp-content/uploads
 chown -R www-data:www-data /var/www/html/wp-content
 chmod -R 755 /var/www/html/wp-content
 
-
 # Démarrer PHP-FPM
 echo "Démarrage de PHP-FPM..."
 php-fpm7.4 -F
-
-
-

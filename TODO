@@ -29,10 +29,41 @@ pour ensuite retry de make et ca doit marcher
 
 ----------
 
-solution automatiser pour faire : 
+Egalement, je veux automatiser la creation des fichiers data pour faire : 
 
 mkdir -p /home/abonnefo/data/mariadb
 mkdir -p /home/abonnefo/data/wordpress
 
 
-puis une fois dans le docker 
+
+----
+
+si je fais manuellement 
+
+➜  14-Inception git:(main) ✗ docker-compose -f srcs/docker-compose.yml exec mariadb mysql -u root -pDBroot
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.5.23-MariaDB-0+deb11u1 Debian 11
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE IF NOT EXISTS 'DBwordpress';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''DBwordpress'' at line 1
+MariaDB [(none)]> CREATE USER IF NOT EXISTS 'wpUser'@'%' IDENTIFIED BY '123';
+ser'@'%' IDENTIFIED BY '123';
+FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON DBwordpress.* TO 'wpUser'@'%' IDENTIFIED BY '123';
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES; 
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [(none)]> exit
+Bye
+➜  14-Inception git:(main) ✗ 
+
+ca fonctionne mais ca doit etre automatisee dans le script

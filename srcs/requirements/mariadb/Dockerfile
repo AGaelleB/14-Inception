@@ -1,24 +1,18 @@
 # srcs/requirements/mariadb/Dockerfile
 FROM debian:bullseye
 
+# Installer MariaDB
 RUN apt-get update && \
-   apt-get install -y mariadb-server && \
-   rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends --no-install-suggests \
+    mariadb-server && \
+    rm -rf /var/lib/apt/lists/*
 
-# Create necessary directories and set permissions
-RUN mkdir -p /var/run/mysqld /var/lib/mysql && \
-   chown -R mysql:mysql /var/run/mysqld /var/lib/mysql
+# Copier les fichiers de configuration et les scripts
+COPY conf/my.cnf /etc/mysql/mariadb.conf.d/
+COPY ./tools/runMariaDB.sh /runMariaDB.sh
 
-# Copy configuration files and scripts
-COPY conf/my.cnf /etc/mysql/my.cnf
-COPY tools/init.sql /docker-entrypoint-initdb.d/
-COPY tools/runMariaDB.sh /usr/local/bin/runMariaDB.sh
+# Rendre le script de démarrage exécutable
+RUN chmod +x /runMariaDB.sh
 
-# Make the startup script executable
-RUN chmod +x /usr/local/bin/runMariaDB.sh
-
-# Expose MySQL port
-EXPOSE 3306
-
-# Set entry point
-ENTRYPOINT ["sh", "/usr/local/bin/runMariaDB.sh"]
+# Définir le point d'entrée pour démarrer MariaDB via le script
+ENTRYPOINT ["/runMariaDB.sh"]

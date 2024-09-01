@@ -3,12 +3,11 @@ DOCKER_COMPOSE = docker-compose
 DOCKER_COMPOSE_FILE = srcs/docker-compose.yml
 DOCKER = docker
 
-# Build
-build:
-	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) build
-
 # Start
-up:
+make:
+	mkdir -p /home/abonnefo/data/mariadb
+	mkdir -p /home/abonnefo/data/wordpress
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) build
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up -d
 
 # Stop
@@ -20,7 +19,7 @@ logs:
 	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) logs -f
 
 # Clean up Docker resources
-clean:
+fclean:
 	$(DOCKER) stop $$(docker ps -qa) || true
 	$(DOCKER) rm $$(docker ps -qa) || true
 	$(DOCKER) rmi -f $$(docker images -qa) || true
@@ -28,7 +27,7 @@ clean:
 	$(DOCKER) network rm $$(docker network ls -q) 2>/dev/null || true
 
 # Rebuild
-rebuild: down clean build up
+re: down clean build make
 
 # Targets
 .PHONY: build up down logs clean rebuild
