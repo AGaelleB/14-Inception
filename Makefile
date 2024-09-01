@@ -27,7 +27,7 @@ fclean:
 	$(DOCKER) network rm $$(docker network ls -q) 2>/dev/null || true
 
 # Rebuild
-re: down clean build make
+re: down fclean make
 
 # Targets
 .PHONY: build up down logs clean rebuild

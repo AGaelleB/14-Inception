@@ -61,13 +61,13 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/abonnefo/data/mariadb
+      device: ${MARIADB_DATA_PATH}
       o: bind
   wordpress_data:
     driver: local
     driver_opts:
       type: none
-      device: /home/abonnefo/data/wordpress
+      device: ${WORDPRESS_DATA_PATH}
       o: bind
 
 networks:
