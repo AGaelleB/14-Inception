@@ -14,4 +14,7 @@ COPY ./tools/runMariaDB.sh /runMariaDB.sh
 # Rendre le script de démarrage exécutable
 RUN chmod +x /runMariaDB.sh
 
+# Expose le port 3306 pour les connexions MariaDB
+EXPOSE 3306
+
 CMD ["/runMariaDB.sh"]
