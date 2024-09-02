@@ -1,0 +1,23 @@
+TEST FINAL POUR VERIFIER SI TOUT FONCTIONNNE 
+
+je dois supprimer tout ce qui est fait dans 
+
+➜  ~ cd data 
+➜  data ls -la
+total 8
+drwxrwxrwx  2 abonnefo abonnefo 4096 Aug 30 17:26 .
+drwx------ 22 abonnefo abonnefo 4096 Aug 30 17:29 ..
+➜  data 
+
+sudo rm -rf ~/data/wordpress && sudo rm -rf ~/data/mariadb
+
+pour ensuite retry de make et ca doit marcher 
+
+---
+
+Inspecter la database pour voir les commentaires dans le docker mariadb en faisant :
+
+docker exec -it mariadb mysql -u root -pDBroot
+    SHOW DATABASES;             # Afficher toutes les bases de données
+    USE DBwordpress;            # Sélectionner une base de données
+    SELECT * FROM wp_comments;  # Afficher les coms
