@@ -1,22 +1,14 @@
-POUR MONTRER LA DATA MARIADB 
+Voir les coms dans la databases mariadb
 
 docker exec -it mariadb mysql -u root -pDBroot
-
-SHOW DATABASES;             # Afficher toutes les bases de données
-USE DBwordpress;            # Sélectionner une base de données
-SELECT * FROM wp_comments;  # Afficher les coms
-
---------------
-
-si je veux voir les logs de mariadb je dois entrer dans le docker avec bash
-docker exec -it mariadb bash
-
-puis 
-
-cat /var/log/mysql/error.log
-
-docker-compose -f srcs/docker-compose.yml exec mariadb cat /var/log/mysql/error.log
-
+    SHOW DATABASES;             # Afficher toutes les bases de données
+    USE DBwordpress;            # Sélectionner une base de données
+    SELECT * FROM wp_comments;  # Afficher les coms
 
 ------
 
+Ne plus voir les commentaires supprimes
+
+docker exec -it mariadb mysql -u root -pDBroot
+    DELETE FROM wp_comments WHERE comment_approved = 'trash';
+    SELECT * FROM wp_comments;

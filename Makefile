@@ -30,4 +30,4 @@ fclean:
 re: down fclean make
 
 # Targets
-.PHONY: build up down logs clean rebuild
+.PHONY: re logs
